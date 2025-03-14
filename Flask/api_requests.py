@@ -70,7 +70,3 @@ def user_login():
         return jsonify({"message":"User authenticated and logged in!", "token":token}), 200
     else:
         return jsonify({"message":"Password doesn't exist!"}), 400
-
-
-if __name__ == "__main__":
-    app.run(debug = True)
