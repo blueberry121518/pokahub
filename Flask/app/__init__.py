@@ -1,15 +1,16 @@
 from flask import Flask
-from Flask.app.config import Config
+from ..config import Config
+from .database import db  # Import database instance
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    # Initialize database
+    # Initialize database with app
     db.init_app(app)
 
-    # Register Blueprints (routes)
-    from routes.user_routes import user_bp
+    # Import and register Blueprints
+    from .routes.user_routes import user_bp
     app.register_blueprint(user_bp, url_prefix='/users')
 
     return app

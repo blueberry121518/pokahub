@@ -1,10 +1,12 @@
-from flask import Flask, request, jsonify
+from flask import Blueprint, jsonify
 import database_functions
 import functions
 
-app = Flask(__name__)
 
-@app.route("/session/upload")
+user_bp = Blueprint("user_bp", __name__)
+
+
+@user_bp.route("/session/upload")
 def session_upload():
     # Load session data
     data = request.json 
@@ -35,7 +37,7 @@ def session_upload():
     )
     return jsonify({"message": "Poker session uploaded successfully!"})
 
-@app.route("/user/create")
+@user_bp.route("/user/create")
 def user_create():
     # Retrieve username and password
     data = request.json
@@ -51,7 +53,7 @@ def user_create():
     database_functions.database_user_create(username, password_hash)
     return jsonify({"message":"User successfully created!"}), 200
 
-@app.route("/user/login")
+@user_bp.route("/user/login")
 def user_login():
     # Retrieve username and password
     data = request.json
