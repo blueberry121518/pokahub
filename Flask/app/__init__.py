@@ -1,6 +1,7 @@
 from flask import Flask
-from ..config import Config
-from .database import db  # Import database instance
+from app.core.config import Config
+from app.core.database import db 
+from app.routes import user_bp, session_bp
 
 def create_app():
     app = Flask(__name__)
@@ -10,7 +11,7 @@ def create_app():
     db.init_app(app)
 
     # Import and register Blueprints
-    from .routes.user_routes import user_bp
-    app.register_blueprint(user_bp, url_prefix='/users')
+    app.register_blueprint(user_bp, url_prefix='/user')
+    app.register_blueprint(session_bp, url_prefix='/session')
 
     return app

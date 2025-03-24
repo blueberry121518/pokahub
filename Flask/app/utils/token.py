@@ -22,19 +22,16 @@ def generate_token(username):
 
     return token
 
-def verify_token(token, expected_username):
+def decode_token(token):
     """
-    Verify and decode a JWT token, ensuring that the token's subject matches the expected username.
+    Decode a JWT token.
+    
+    Attempts to decode the token using the secret key from the current Flask app.
+    Returns the decoded payload if the token is valid.
+    Returns None if the token is expired or invalid.
     """
-
-    # Attempts to decode the token
-        # If the token is expired or doesn't exist, or the username doesn't match, return None
-        # Else return the corresponding decoded payload
     try:
         payload = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=["HS256"])
-
-        if payload.get("sub") != expected_username:
-            return None  # Token valid but does not belong to the expected user
         return payload
     except jwt.ExpiredSignatureError:
         return None  # Token expired

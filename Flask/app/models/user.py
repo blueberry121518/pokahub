@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 from app.core.database import db
 
 class User(db.Model):
-    __tablename__ = 'users'
+    __tablename__ = 'user'
 
     # Use username as the primary key, ensuring it's unique and not nullable.
     username = db.Column(db.String(80), primary_key=True, unique=True, nullable=False)

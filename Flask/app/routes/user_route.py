@@ -1,11 +1,11 @@
 from flask import Blueprint, request, jsonify
-import app.services.user_services
+import Flask.app.services.user_service
 
-auth_bp = Blueprint("auth", __name__)
+user_bp = Blueprint("user", __name__)
 
-user_services = app.services.user_services
+user_services = app.services.user_service
 
-@auth_bp.route("/user/create", methods=["POST"])
+@user_bp.route("/create", methods=["POST"])
 def user_create():
     data = request.get_json()
     if not data:
@@ -23,7 +23,7 @@ def user_create():
 
     return jsonify({"message": "User successfully created!"}), 201
 
-@auth_bp.route("/user/login", methods=["POST"])
+@user_bp.route("/login", methods=["POST"])
 def user_login():
     data = request.get_json()
     if not data:
