@@ -5,8 +5,10 @@ from app.utils.token import generate_token
 
 def create_user(username, password):
     """
-    Creates a new user if the username does not already exist.
-    Returns a tuple: (User object or None, error message or None).
+    Purpose: Creates a user if the username doesn't exist
+    Input: Username and password
+    Output: User instance if successful 
+            None if unsuccessful
     """
     # Check if the username is already taken.
     if User.query.filter_by(username=username).first():
@@ -24,8 +26,9 @@ def create_user(username, password):
 
 def authenticate_user(username, password):
     """
-    Authenticates a user by username and password.
-    Returns a tuple: (token or None, error message or None).
+    Purpose: Authenticates a user using username and password
+    Input: Username and password
+    Output: JWT token if a user exists and None if not
     """
     # Retrieve the user by username.
     user = User.query.filter_by(username=username).first()

@@ -4,7 +4,9 @@ from flask import current_app
 
 def generate_token(username):
     """
-    Generate a JWT token for the given username.
+    Purpose: Generate a JWT token
+    Input: A specific username
+    Output: JWT token string
     """
 
     # Current time
@@ -24,11 +26,11 @@ def generate_token(username):
 
 def decode_token(token):
     """
-    Decode a JWT token.
-    
-    Attempts to decode the token using the secret key from the current Flask app.
-    Returns the decoded payload if the token is valid.
-    Returns None if the token is expired or invalid.
+    Purpose: Decode a JWT token
+
+    Input: JWT token string
+    Output: Decoded payload if token is valid
+            None if error is present
     """
     try:
         payload = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=["HS256"])

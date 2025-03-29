@@ -1,11 +1,12 @@
 from app.core.database import db
-from Flask.app.models.session import Sessions  # Assume you have defined the Sessions model appropriately
+from Flask.app.models.session import Sessions
 
 def create_session(data, username):
     """
-    Create and save a new session for the given username.
-    Assumes data has been validated.
-    Returns a tuple of (session_object, error_message).
+    Purpose: Creates and save a poker session
+    Input: Session data and associated username
+    Output: Created session if successful
+            None if unsucceessful
     """
     try:
         new_session = Sessions(
