@@ -6,7 +6,7 @@ def validate_two_decimals(value: Decimal):
     if value.as_tuple().exponent < -2:
         raise ValidationError("Must have at most two decimal places.")
 
-class SessionSchemas(Schema):
+class SessionSchema(Schema):
     # The buy in must be a positive number
     buy_in = fields.Decimal(required=True, as_string=True, validate=[validate.Range(min=0), validate_two_decimals])
 

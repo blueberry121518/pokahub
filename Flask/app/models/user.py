@@ -7,7 +7,7 @@ class User(db.Model):
     # Use username as the primary key, ensuring it's unique and not nullable.
     username = db.Column(db.String(80), primary_key=True, unique=True, nullable=False)
     
-    # User's chosen displayname
+    # User's chosen display name
     display_name = db.Column(db.String(80), nullable=False)
     
     # Store the hashed password.

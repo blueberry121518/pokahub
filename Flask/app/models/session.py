@@ -1,8 +1,28 @@
 import uuid
 from datetime import datetime, timezone
+from decimal import Decimal
+from typing import List
 from app.core.database import db
 
 class Session(db.Model):
+    """
+    Represents a poker session in the database.
+    
+    Attributes:
+        session_id (str): Unique identifier for the session
+        username (str): Associated user's username
+        buy_in (Decimal): Amount bought in
+        buy_out (Decimal): Amount cashed out
+        start_time (datetime): Session start time
+        end_time (datetime): Session end time
+        title (str): Session title
+        caption (str): Session description or notes
+        images (List[str]): URLs of associated images
+        public (bool): Whether session is publicly visible
+        blinds (List[Decimal]): List of blind amounts
+        ante (Decimal): Ante amount if any
+        created_at (datetime): Record creation timestamp
+    """
     __tablename__ = 'session'
     
     # Unique session identifier using UUID
@@ -23,7 +43,7 @@ class Session(db.Model):
     title = db.Column(db.String(255), nullable=False)
     
     # Longer text for posting captions or personal notes
-    caption = db.Column(db.Text, nullable=False)
+    caption = db.Column(db.Text, nullable=True)
     
     # URL for an uploaded image 
     images = db.Column(db.JSON, nullable=True)
@@ -40,5 +60,5 @@ class Session(db.Model):
     # Auto-generated timestamp for record creation
     created_at = db.Column(db.DateTime, server_default=db.func.current_timestamp())
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"<Session {self.session_id} by {self.username}>"

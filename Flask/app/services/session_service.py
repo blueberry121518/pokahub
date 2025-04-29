@@ -1,15 +1,22 @@
+from typing import Tuple, Optional
 from app.core.database import db
-from Flask.app.models.session import Sessions
+from app.models.session import Session
 
-def create_session(data, username):
+def create_session(data: dict, username: str) -> Tuple[Optional[Session], Optional[str]]:
     """
-    Purpose: Creates and save a poker session
-    Input: Session data and associated username
-    Output: Created session if successful
-            None if unsucceessful
+    Create and save a poker session.
+
+    Args:
+        data (dict): Session data containing buy_in, buy_out, times, etc.
+        username (str): Associated username for the session
+
+    Returns:
+        Tuple[Optional[Session], Optional[str]]: (Session object, error message)
+            - On success: (Session, None)
+            - On failure: (None, error_message)
     """
     try:
-        new_session = Sessions(
+        new_session = Session(
             username=username,
             buy_in=data.get('buy_in'),
             buy_out=data.get('buy_out'),
@@ -17,7 +24,7 @@ def create_session(data, username):
             end_time=data.get('end_time'),
             title=data.get('title'),
             caption=data.get('caption'),
-            image_url=data.get('image_url'),
+            images=data.get('images'),
             public=data.get('public'),
             blinds=data.get('blinds'),
             ante=data.get('ante')
